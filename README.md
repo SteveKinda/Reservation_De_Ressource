@@ -83,7 +83,7 @@ e-Diagramme du jalon_1: contient le diagramme de classes réalisé pour le premi
 
 f-README.md : présente le projet, ses objectifs et son fonctionnement. 
 
-10. Tests et vérifications
+9. Tests et vérifications
 Les essais reproductibles sont réalisés afin de vérifier le respect des règles définies. Les principaux cas à tester sont : A-La création d'une ressource avec des informations valides.
 
 B-La création d'un utilisateur avec des informations valides. 
@@ -95,8 +95,7 @@ G-La libération correcte d'une ressource.
 H-La vérification de la disponibilité après libération.
  Les tests permettent de vérifier que les constructeurs et les méthodes respectent les règles établies. 
  
-12. Limites du Jalon 1
-13. 
+10. Limites du Jalon 1 
  Cette première étape se concentre sur la conception du modèle et le respect des invariants. Certaines fonctionnalités ne sont pas encore prises en charge :
 - La gestion de plusieurs créneaux pour une même ressource. -La gestion complète d'un calendrier.
 - Les réservations répétées.
@@ -105,7 +104,7 @@ H-La vérification de la disponibilité après libération.
 - La création d'une interface graphique.
 Ces fonctionnalités pourront être introduites progressivement au cours des prochains jalons.
 
- 14. Résultats attendus du Jalon 1
+ 11. Résultats attendus du Jalon 1
  À l'issue de cette première étape, le projet doit disposer : · Des classes Ressource, Utilisateur et Creneau. 
 - Identifiants correctement définis.
 - De constructeurs contrôlés.
@@ -114,7 +113,7 @@ Ces fonctionnalités pourront être introduites progressivement au cours des pro
 - D'un programme compilable et exécutable.
 - D'une documentation README.md complète.
 - 
-15. Membres du groupe 
+ 12. Membres du groupe 
 Ce projet est réalisé par un groupe de trois étudiants :
 - KINDA Steve
 - AKPO Nandja 
