@@ -89,7 +89,7 @@ Ces fonctionnalités pourront être introduites progressivement au cours des pro
 -D'une documentation README.md complète. 
 12. Membres du groupe 
 Ce projet est réalisé par un groupe de trois étudiants : 
- KINDA Steve
+-KINDA Steve
 - AKPO Nandja 
 - OUEDRAOGO Anicet 
 13. Conclusion 
