@@ -17,7 +17,6 @@ public abstract class Ressource{
         this.nomRess = nomRess;
         this.localisation = localisation;
     }
-
     public String getIdRess(){ 
         return idRess; 
     }
@@ -27,9 +26,21 @@ public abstract class Ressource{
     public String getLocalisation(){ 
         return localisation; 
     }
-
     public abstract boolean estCompatible(Creneau creneau);
-
+    @Override
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if (!(o instanceof Ressource)) return false;
+        return idRess.equals(((Ressource) o).idRess);
+    }
+    @Override
+    public int hashCode(){
+        return idRess.hashCode();
+    }
+    @Override
+    public String toString(){
+        return nomRess + " (" + idRess + ")";
+    }
     public void afficher(){
         System.out.println(nomRess + " (" + idRess + ")  " + localisation);
     }
