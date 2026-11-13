@@ -13,11 +13,9 @@ public class Salle extends Ressource{
         this.heureOuverture = heureOuverture;
         this.heureFermeture = heureFermeture;
     }
-
     public int getCapacite(){ 
         return capacite; 
     }
-
     @Override
     public boolean estCompatible(Creneau creneau){
         return creneau != null && creneau.getHeureDebut() >= heureOuverture && creneau.getHeureFin() <= heureFermeture;
