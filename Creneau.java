@@ -14,6 +14,9 @@ public class Creneau{
         if (heureFin<0){
             throw new IllegalArgumentException("L'heure de fin ne doit pas etre negative");
         }
+        if (heureFin>24){
+            throw new IllegalArgumentException("L'heure de fin ne doit pas dépasser 24");
+        }
         if (heureFin<=heureDebut){
             throw new IllegalArgumentException("L'heure de fin doit être supérieur à l'heure de début");
         }
