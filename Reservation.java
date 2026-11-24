@@ -1,35 +1,35 @@
 import java.util.Objects;
 
-public final class Reservation {
+public final class Reservation{
     private final Utilisateur utilisateur;
     private final Ressource ressource;
     private final Creneau creneau;
 
-    public Reservation(Utilisateur utilisateur, Ressource ressource, Creneau creneau) {
-        if (utilisateur == null) {
+    public Reservation(Utilisateur utilisateur, Ressource ressource, Creneau creneau){
+        if (utilisateur == null){
             throw new IllegalArgumentException("L'utilisateur ne doit pas être nul");
         }
-        if (ressource == null) {
+        if (ressource == null){
             throw new IllegalArgumentException("La ressource ne doit pas être nulle");
         }
-        if (creneau == null) {
+        if (creneau == null){
             throw new IllegalArgumentException("Le créneau ne doit pas être nul");
         }
         this.utilisateur = utilisateur;
         this.ressource = ressource;
         this.creneau = creneau;
     }
-    public Utilisateur getUtilisateur() {
+    public Utilisateur getUtilisateur(){
         return utilisateur;
     }
-    public Ressource getRessource() {
+    public Ressource getRessource(){
         return ressource;
     }
-    public Creneau getCreneau() {
+    public Creneau getCreneau(){
         return creneau;
     }
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o){
         if (this == o) return true;
         if (!(o instanceof Reservation)) return false;
         Reservation autre = (Reservation) o;
