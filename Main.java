@@ -1,50 +1,38 @@
-public class Main {
-    private static int nombreEssais = 0;
+/**
+ * Démonstration en ligne de commande (recette) : elle montre un scénario complet.
+ * Les vérifications automatiques sont dans les tests JUnit.
+ */
+public class Main{
+    public static void main(String[] args){
+        CalendrierReservations calendrier = new CalendrierMemoire();
+        ServiceReservation service = new ServiceReservation(calendrier);
 
-    private static void verifier(boolean resultat, String nom) {
-        nombreEssais++;
-        if (!resultat) {
-            throw new AssertionError("Échec : " + nom);
-        }
-        System.out.println("Essai réussi : " + nom);
+        Utilisateur steve = new Utilisateur("U1", "Kinda Steve", "steve@email.com");
+        service.ajouterRessource(new Salle("S1", "Salle 101", "Bâtiment A", 30, 8, 18));
+        service.ajouterRessource(new Equipement("E1", "Projecteur", "Bâtiment A", "video", 4));
+
+        System.out.println("1. Réservation valide");
+        Reservation r1 = service.reserver(steve, "S1", new Creneau("Lundi", 8, 10));
+        System.out.println("   OK : " + r1);
+
+        tenter(service, steve, "2. Conflit de créneaux", "S1", new Creneau("Lundi", 9, 11));
+        tenter(service, steve, "3. Créneau adjacent (accepté)", "S1", new Creneau("Lundi", 10, 12));
+        tenter(service, steve, "4. Ressource absente", "S999", new Creneau("Lundi", 8, 10));
+        tenter(service, steve, "5. Salle hors de ses horaires", "S1", new Creneau("Lundi", 6, 8));
+        tenter(service, steve, "6. Équipement trop longtemps", "E1", new Creneau("Mardi", 8, 13));
+
+        System.out.println("7. Annulation de la première réservation");
+        service.annuler(r1);
+        System.out.println("   Réservations restantes de S1 : " + service.reservationsDe("S1"));
     }
 
-    public static void main(String[] args) {
-        Localisation localisation = new Localisation("Bâtiment A", 1);
-        Utilisateur utilisateur = new Utilisateur("U1", "Kinda Steve", "steve@email.com");
-        verifier(utilisateur.getId().equals("U1"), "création d'un utilisateur");
-        try {
-            new Utilisateur("", "Anicet", "a@email.com");
-            throw new AssertionError("Un identifiant vide devait être refusé");
-        } catch (IllegalArgumentException e) {
-            verifier(true, "identifiant vide refusé");
+    private static void tenter(ServiceReservation service, Utilisateur u, String titre, String idRessource, Creneau creneau) {
+        System.out.println(titre);
+        try{
+            Reservation r = service.reserver(u, idRessource, creneau);
+            System.out.println("   OK : " + r);
+        } catch (ReservationException e){
+            System.out.println("   Refusé (" + e.getClass().getSimpleName() + ") : " + e.getMessage());
         }
-        Creneau matin = new Creneau("Lundi", 8, 10);
-        Creneau tropLong = new Creneau("Lundi", 8, 14);
-        verifier(matin.getDuree() == 2, "durée du créneau calculée");
-        try {
-            new Creneau("Mardi", 14, 12);
-            throw new AssertionError("Un créneau invalide devait être refusé");
-        } catch (IllegalArgumentException e) {
-            verifier(true, "créneau invalide refusé");
-        }
-
-        Salle salle = new Salle("S1", "Salle 101", "S001", 30, 8, 18);
-        Equipement projecteur = new Equipement("E1", "Projecteur", "E001", "video", 4);
-        verifier(salle.getCapacite() == 30, "capacité de la salle");
-        Ressource ressourceSalle = salle;
-        Ressource ressourceEquipement = projecteur;
-        verifier(ressourceSalle.estCompatible(matin), "salle compatible avec le créneau");
-        verifier(ressourceEquipement.estCompatible(matin), "équipement compatible avec le créneau");
-        verifier(!ressourceEquipement.estCompatible(tropLong), "équipement refuse un créneau trop long");
-
-        CalendrierReservations calendrier = new CalendrierMemoire();
-        verifier(matin.equals(new Creneau("Lundi", 8, 10)) && matin.hashCode() == new Creneau("Lundi", 8, 10).hashCode(),"créneaux identiques : equals et hashCode");
-        verifier(matin.chevauche(new Creneau("Lundi", 9, 11)) && !matin.chevauche(new Creneau("Lundi", 10, 12)),"chevauchement détecté, créneaux adjacents acceptés");
-        Reservation r1 = new Reservation(utilisateur, salle, matin);
-        verifier(calendrier.ajouter(r1) && calendrier.taille() == 1, "ajout d'une réservation");
-        Reservation conflit = new Reservation(utilisateur, salle, new Creneau("Lundi", 9, 11));
-        verifier(!calendrier.ajouter(conflit) && calendrier.taille() == 1, "conflit refusé, calendrier inchangé");
-        System.out.println(nombreEssais + " essais réussis.");
     }
 }
