@@ -1,7 +1,3 @@
-/**
- * Démonstration en ligne de commande (recette) : elle montre un scénario complet.
- * Les vérifications automatiques sont dans les tests JUnit.
- */
 public class Main{
     public static void main(String[] args){
         CalendrierReservations calendrier = new CalendrierMemoire();

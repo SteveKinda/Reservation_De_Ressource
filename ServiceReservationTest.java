@@ -23,8 +23,6 @@ class ServiceReservationTest {
         service.ajouterRessource(projecteur);
     }
 
-    // ---------- reserver : cas nominaux et limites ----------
-
     @Test
     void reserverEnregistreLaReservation() {
         Reservation r = service.reserver(utilisateur, "S1", matin);
@@ -44,8 +42,6 @@ class ServiceReservationTest {
         service.reserver(utilisateur, "E1", new Creneau("Lundi", 8, 12));
         assertEquals(1, calendrier.taille());
     }
-
-    // ---------- reserver : cas d'échec (l'état est vérifié après l'exception) ----------
 
     @Test
     void conflitDeCreneauxLanceUneExceptionEtLaisseLeCalendrierInchange() {
@@ -86,7 +82,6 @@ class ServiceReservationTest {
         assertEquals(0, calendrier.taille());
     }
 
-    // ---------- annuler ----------
 
     @Test
     void annulerLibereLaRessource() {
@@ -113,7 +108,6 @@ class ServiceReservationTest {
         assertThrows(RessourceAbsenteException.class, () -> service.annuler(r));
     }
 
-    // ---------- ressources ----------
 
     @Test
     void identifiantDeRessourceDejaUtiliseEstRefuse() {
